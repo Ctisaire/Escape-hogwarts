@@ -318,7 +318,7 @@ opacity:.8;
 <div id="bg" class="fondo"></div>
 
 <audio id="music" loop>
-.mp3" type="audio/mpeg">
+  <source src="./music.mp3" type="audio/mpeg">
 </audio>
 
 <button class="boton-musica" onclick="toggleMusic()">
@@ -528,30 +528,39 @@ document.querySelectorAll(".opcion")
 
 }
 
-const music=document.getElementById("music");
+const music = document.getElementById("music");
+const musicBtn = document.getElementById("musicBtn");
 
 function toggleMusic(){
 
-if(music.paused){
+    if(music.paused){
 
-music.play();
+        music.play()
+        .then(() => {
+            musicBtn.innerHTML = "🔇 Silenciar Magia";
+        })
+        .catch(err => {
+            console.log(err);
+        });
 
-}else{
+    }else{
 
-music.pause();
-
-}
-}
-
-document.addEventListener("click",()=>{
-
-if(music.paused){
-
-music.play().catch(()=>{});
-
+        music.pause();
+        musicBtn.innerHTML = "🎵 Activar Magia";
+    }
 }
 
-},{once:true});
+function iniciarMusica(){
+
+    music.play()
+    .then(() => {
+        musicBtn.innerHTML = "🔇 Silenciar Magia";
+    })
+    .catch(() => {});
+}
+
+document.addEventListener("touchstart", iniciarMusica, {once:true});
+document.addEventListener("click", iniciarMusica, {once:true});
 
 </script>
 
