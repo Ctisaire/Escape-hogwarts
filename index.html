@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 
 <meta charset="UTF-8">
@@ -7,40 +8,90 @@
 
 <title>⚡ Búsqueda de los Horrocruxes ⚡</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheeter-box;
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 body{
 
-margin:0;
-padding:20px;
-
 font-family:'Cinzel',serif;
 
-background:
-radial-gradient(circle at center,#1a1a1a,#070707);
+background:#050505;
 
-color:#f1d38b;
+color:#f3d180;
 
 overflow-x:hidden;
 
 min-height:100vh;
 }
 
-.magic{
+.fondo{
+
 position:fixed;
-width:4px;
-height:4px;
-border-radius:50%;
-background:gold;
-animation:float 10s linear infinite;
-opacity:0.7;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background-size:cover;
+background-position:center;
+
+filter:
+blur(8px)
+brightness(0.25);
+
+z-index:-2;
 }
 
-@keyframes float{
+.fondo::after{
+
+content:"";
+
+position:absolute;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:
+rgba(0,0,0,0.55);
+}
+
+.magic{
+
+position:fixed;
+
+width:4px;
+height:4px;
+
+background:gold;
+
+border-radius:100%;
+
+opacity:.8;
+
+z-index:-1;
+
+animation:flotar linear infinite;
+}
+
+@keyframes flotar{
 
 0%{
-transform:translateY(100vh);
+
+transform:
+translateY(110vh);
+
 opacity:0;
 }
 
@@ -53,106 +104,108 @@ opacity:1;
 }
 
 100%{
-transform:translateY(-100px);
+
+transform:
+translateY(-100px);
+
 opacity:0;
 }
+
 }
 
 .contenedor{
 
-max-width:1000px;
+width:95%;
 
-margin:auto;
+max-width:950px;
+
+margin:20px auto;
+
+padding:30px;
 
 background:
-rgba(20,20,20,0.92);
+rgba(15,15,15,0.85);
 
-border:3px solid #b8860b;
+border:2px solid #d4af37;
 
-padding:35px;
+border-radius:12px;
 
 box-shadow:
-0 0 30px rgba(255,215,0,0.2);
+0 0 25px rgba(212,175,55,.25);
 
-animation:entrada 1s;
+backdrop-filter:blur(4px);
+
+animation:entrada 1s ease;
 }
 
 @keyframes entrada{
 
 from{
-
 opacity:0;
-transform:scale(0.9);
-
+transform:translateY(25px);
 }
 
 to{
-
 opacity:1;
-transform:scale(1);
-
+transform:translateY(0);
 }
 
 }
 
 .logo{
 
+width:140px;
+
 display:block;
 
 margin:auto;
-
-width:220px;
 }
 
 h1{
 
+margin-top:15px;
+
 text-align:center;
+
+font-size:clamp(30px,5vw,52px);
 
 color:#d4af37;
 
-font-size:48px;
-
 text-shadow:
-0 0 15px gold;
+0 0 10px gold;
 }
 
 .intro{
 
+margin-top:20px;
+
 text-align:center;
 
-margin-bottom:25px;
-
 font-size:18px;
-}
 
-.localizacionimg{
-
-width:100%;
-
-max-height:350px;
-
-object-fit:cover;
-
-border:2px solid #d4af37;
-
-margin-top:15px;
-margin-bottom:25px;
+line-height:1.6;
 }
 
 h2{
 
+margin-top:25px;
+
 text-align:center;
 
 color:#ffd700;
+
+font-size:32px;
 }
 
 #pregunta{
 
-font-size:24px;
-
 text-align:center;
 
-margin:30px 0;
+margin:25px 0;
+
+font-size:24px;
+
+line-height:1.5;
 }
 
 .opcion{
@@ -161,72 +214,99 @@ width:100%;
 
 padding:18px;
 
-margin-top:10px;
+margin-top:12px;
 
-background:#2b2b2b;
+background:
+rgba(255,255,255,.08);
 
-border:1px solid #555;
+border:1px solid #876514;
 
 color:white;
 
 font-size:18px;
 
+border-radius:8px;
+
 cursor:pointer;
 
-transition:0.3s;
+transition:.3s;
 }
 
 .opcion:hover{
 
-background:#3a3a3a;
+background:
+rgba(255,255,255,.15);
+
+transform:scale(1.01);
 }
 
 .correcta{
 
-background:#1f7a1f !important;
+background:#1d7429 !important;
+
+border:2px solid gold !important;
 
 animation:brillo 1s infinite;
 }
 
 @keyframes brillo{
 
-0%{box-shadow:0 0 10px gold;}
-50%{box-shadow:0 0 30px gold;}
-100%{box-shadow:0 0 10px gold;}
+0%{
+box-shadow:0 0 8px gold;
+}
+
+50%{
+box-shadow:0 0 30px gold;
+}
+
+100%{
+box-shadow:0 0 8px gold;
+}
 
 }
 
 .incorrecta{
 
-background:#8b1e1e !important;
+background:#8d1f1f !important;
 }
 
 #resultado{
 
-margin-top:20px;
+margin-top:25px;
+
+text-align:center;
 
 font-size:22px;
 
 font-weight:bold;
-
-text-align:center;
 }
 
-#musicBtn{
+.boton-musica{
 
 display:block;
 
 margin:20px auto;
 
-padding:12px 20px;
-
 background:#d4af37;
 
 border:none;
 
-font-size:16px;
+padding:12px 20px;
+
+border-radius:8px;
+
+font-weight:bold;
 
 cursor:pointer;
+}
+
+.footer{
+
+margin-top:30px;
+
+text-align:center;
+
+opacity:.8;
 }
 
 </style>
@@ -235,11 +315,13 @@ cursor:pointer;
 
 <body>
 
+<div id="bg" class="fondo"></div>
+
 <audio id="music" loop>
-3" type="audio/mpeg">
+.mp3" type="audio/mpeg">
 </audio>
 
-<button id="musicBtn" onclick="toggleMusic()">
+<button class="boton-musica" onclick="toggleMusic()">
 🎵 Activar / Desactivar Música
 </button>
 
@@ -251,10 +333,8 @@ cursor:pointer;
 
 <p class="intro">
 El Ministerio de Magia necesita tu ayuda.
-Resuelve los enigmas para encontrar el siguiente rastro.
+Resuelve los enigmas y encuentra el siguiente rastro antes de que las fuerzas oscuras lo hagan.
 </p>
-
-<div id="imagen"></div>
 
 <h2 id="localizacion"></h2>
 
@@ -264,81 +344,153 @@ Resuelve los enigmas para encontrar el siguiente rastro.
 
 <div id="resultado"></div>
 
+<div class="footer">
+🏰 Hogwarts School of Witchcraft and Wizardry
+</div>
+
 </div>
 
 <script>
 
-for(let i=0;i<35;i++){
+for(let i=0;i<50;i++){
 
-let s=document.createElement('div');
+const p=document.createElement("div");
 
-s.className='magic';
+p.className="magic";
 
-s.style.left=Math.random()*100+'vw';
+p.style.left=Math.random()*100+"vw";
 
-s.style.animationDelay=Math.random()*10+'s';
+p.style.animationDuration=(8+Math.random()*15)+"s";
 
-s.style.animationDuration=(8+Math.random()*10)+'s';
+p.style.animationDelay=Math.random()*8+"s";
 
-document.body.appendChild(s);
+document.body.appendChild(p);
 
 }
 
 const preguntas={
 
-1:{img:'loc1.jpg',localizacion:'Harry Walker',pregunta:'¿Qué forma tiene el Patronus de Harry?',correcta:'A',respuestas:{A:'Ciervo',B:'Lobo',C:'Águila',D:'Zorro'}},
+1:{
+img:"loc1.jpg",
+localizacion:"📍 Harry Walker",
+pregunta:"¿Qué forma tiene el Patronus de Harry?",
+correcta:"A",
+respuestas:{
+A:"Ciervo",
+B:"Lobo",
+C:"Águila",
+D:"Zorro"
+}
+},
 
-2:{img:'loc2.jpg',localizacion:'Zona Verde',pregunta:'¿Qué forma adopta el Patronus de Luna Lovegood?',correcta:'D',respuestas:{A:'Cisne',B:'Cierva',C:'Gato',D:'Liebre'}},
+2:{
+img:"loc2.jpg",
+localizacion:"📍 Zona Verde",
+pregunta:"¿Qué forma adopta el Patronus de Luna Lovegood?",
+correcta:"D",
+respuestas:{
+A:"Cisne",
+B:"Cierva",
+C:"Gato",
+D:"Liebre"
+}
+},
 
-3:{img:'loc3.jpg',localizacion:'Nou Pins',pregunta:'¿Cómo se llama el centauro que ayuda a Harry en el Bosque Prohibido?',correcta:'C',respuestas:{A:'Bane',B:'Ronan',C:'Firenze',D:'Magorian'}},
+3:{
+img:"loc3.jpg",
+localizacion:"📍 Nou Pins",
+pregunta:"¿Cómo se llama el centauro que ayuda a Harry en el Bosque Prohibido?",
+correcta:"C",
+respuestas:{
+A:"Bane",
+B:"Ronan",
+C:"Firenze",
+D:"Magorian"
+}
+},
 
-4:{img:'loc4.jpg',localizacion:'Metro Via Júlia',pregunta:'¿Cuál es el nombre de la madre de Sirius Black?',correcta:'C',respuestas:{A:'Bellatrix Black',B:'Druella Black',C:'Walburga Black',D:'Andromeda Black'}},
+4:{
+img:"loc4.jpg",
+localizacion:"📍 Metro Via Júlia",
+pregunta:"¿Cuál es el nombre de la madre de Sirius Black?",
+correcta:"C",
+respuestas:{
+A:"Bellatrix Black",
+B:"Druella Black",
+C:"Walburga Black",
+D:"Andromeda Black"
+}
+},
 
-5:{img:'loc5.jpg',localizacion:'Fuentes Via Júlia',pregunta:'¿Quién le da a Harry las branquialgas para realizar la segunda prueba del Torneo de los Tres Magos?',correcta:'A',respuestas:{A:'Dobby',B:'Neville',C:'Ron',D:'Hermione'}},
+5:{
+img:"loc5.jpg",
+localizacion:"📍 Fuentes Via Júlia",
+pregunta:"¿Quién le da a Harry las branquialgas para realizar la segunda prueba del Torneo de los Tres Magos?",
+correcta:"A",
+respuestas:{
+A:"Dobby",
+B:"Neville",
+C:"Ron",
+D:"Hermione"
+}
+},
 
-6:{img:'loc6.jpg',localizacion:'Ángel Pestaña',pregunta:'¿Cuál es el nombre completo de Albus Dumbledore?',correcta:'B',respuestas:{A:'Albus Percival Walfred Brian Dumbledore',B:'Albus Percival Wulfric Brian Dumbledore',C:'Albus Percival Wilfred Brian Dumbledore',D:'Albus Percival Wulfric Brayan Dumbledore'}}
+6:{
+img:"loc6.jpg",
+localizacion:"📍 Ángel Pestaña",
+pregunta:"¿Cuál es el nombre completo de Albus Dumbledore?",
+correcta:"B",
+respuestas:{
+A:"Albus Percival Walfred Brian Dumbledore",
+B:"Albus Percival Wulfric Brian Dumbledore",
+C:"Albus Percival Wilfred Brian Dumbledore",
+D:"Albus Percival Wulfric Brayan Dumbledore"
+}
+}
 
 };
 
-const pista=new URLSearchParams(window.location.search).get('pista')||'1';
+const pista=new URLSearchParams(window.location.search).get("pista")||"1";
 
 const datos=preguntas[pista];
 
-document.getElementById('imagen').innerHTML=
-'<img src="'+datos.img+'" class="localizacionimg">';
+document.getElementById("bg").style.backgroundImage=
+`url('${datos.img}')`;
 
-document.getElementById('localizacion').innerHTML=
-'📍 '+datos.localizacion;
+document.getElementById("localizacion").textContent=
+datos.localizacion;
 
-document.getElementById('pregunta').innerHTML=
+document.getElementById("pregunta").textContent=
 datos.pregunta;
 
 let intentos=0;
 
-for(let letra in datos.respuestas){
+for(const letra in datos.respuestas){
 
-let b=document.createElement('button');
+const b=document.createElement("button");
 
-b.className='opcion';
+b.className="opcion";
 
 b.id=letra;
 
-b.innerHTML='<b>'+letra+')</b> '+datos.respuestas[letra];
+b.innerHTML=
+`<strong>${letra})</strong> ${datos.respuestas[letra]}`;
 
 b.onclick=()=>comprobar(letra);
 
-document.getElementById('respuestas').appendChild(b);
-
+document.getElementById("respuestas").appendChild(b);
 }
 
 function comprobar(letra){
 
 if(letra===datos.correcta){
 
-document.getElementById(letra).classList.add('correcta');
+document.getElementById(letra)
+.classList.add("correcta");
 
-document.getElementById('resultado').innerHTML=
-'✅ ¡Correcto! La magia te guía a la siguiente pista.';
+document.getElementById("resultado")
+.innerHTML=
+"✅ ¡Correcto! Continúa hacia la siguiente pista.";
 
 desactivar();
 
@@ -347,47 +499,59 @@ return;
 
 intentos++;
 
-document.getElementById(letra).classList.add('incorrecta');
+document.getElementById(letra)
+.classList.add("incorrecta");
 
 if(intentos>=2){
 
-document.getElementById(datos.correcta).classList.add('correcta');
+document.getElementById(datos.correcta)
+.classList.add("correcta");
 
-document.getElementById('resultado').innerHTML=
-'❌ Has agotado tus intentos.';
+document.getElementById("resultado")
+.innerHTML=
+"❌ Has agotado tus intentos.";
 
 desactivar();
 
 }else{
 
-document.getElementById('resultado').innerHTML=
-'❌ Incorrecto. Te queda un intento.';
+document.getElementById("resultado")
+.innerHTML=
+"❌ Incorrecto. Te queda un intento.";
 }
-
 }
 
 function desactivar(){
 
-document.querySelectorAll('.opcion')
+document.querySelectorAll(".opcion")
 .forEach(x=>x.disabled=true);
 
 }
 
+const music=document.getElementById("music");
+
 function toggleMusic(){
 
-let m=document.getElementById('music');
+if(music.paused){
 
-if(m.paused){
-
-m.play();
+music.play();
 
 }else{
 
-m.pause();
+music.pause();
+
+}
+}
+
+document.addEventListener("click",()=>{
+
+if(music.paused){
+
+music.play().catch(()=>{});
 
 }
 
-}
+},{once:true});
 
 </script>
 
