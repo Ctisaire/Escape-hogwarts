@@ -1,20 +1,251 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Escape Hogwarts</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Escape Hogwarts</title>
+
+<style>
+
+body{
+    background:#0f0f0f;
+    color:#f5e6a7;
+    font-family:Georgia, serif;
+    margin:0;
+    padding:20px;
+}
+
+.contenedor{
+    max-width:900px;
+    margin:auto;
+    background:#1a1a1a;
+    border:2px solid #d4af37;
+    border-radius:15px;
+    padding:30px;
+}
+
+h1{
+    text-align:center;
+    color:#d4af37;
+}
+
+h2{
+    color:#d4af37;
+}
+
+.opcion{
+    display:block;
+    width:100%;
+    margin:10px 0;
+    padding:15px;
+    background:#2d2d2d;
+    border:1px solid #666;
+    color:white;
+    border-radius:10px;
+    cursor:pointer;
+    text-align:left;
+}
+
+.opcion:hover{
+    background:#3d3d3d;
+}
+
+.correcta{
+    background:#1e8f3f !important;
+    border-color:#1e8f3f;
+}
+
+.incorrecta{
+    background:#a12828 !important;
+}
+
+#resultado{
+    margin-top:20px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+</style>
+
 </head>
 
-<body style="background:black;color:gold;text-align:center;font-family:Georgia;padding-top:100px;">
+<body>
+
+<div class="contenedor">
 
 <h1>⚡ Escape Hogwarts ⚡</h1>
 
-<p>
-Bienvenido joven mago.
-</p>
+<h2 id="localizacion"></h2>
 
-<p>
-Tu misión será encontrar el objeto mágico oculto.
-</p>
+<p id="pregunta"></p>
+
+<div id="respuestas"></div>
+
+<div id="resultado"></div>
+
+</div>
+
+<script>
+
+const preguntas = {
+
+1:{
+localizacion:"Harry Walker",
+pregunta:"¿Qué forma tiene el Patronus de Harry?",
+correcta:"A",
+respuestas:{
+A:"Ciervo",
+B:"Lobo",
+C:"Águila",
+D:"Zorro"
+}
+},
+
+2:{
+localizacion:"Zona Verde",
+pregunta:"¿Qué forma adopta el Patronus de Luna Lovegood?",
+correcta:"D",
+respuestas:{
+A:"Cisne",
+B:"Cierva",
+C:"Gato",
+D:"Liebre"
+}
+}
+,
+
+3:{
+localizacion:"Nou Pins",
+pregunta:"¿Cómo se llama el centauro que ayuda a Harry en el Bosque Prohibido?",
+correcta:"C",
+respuestas:{
+A:"Bane",
+B:"Ronan",
+C:"Firenze",
+D:"Magorian"
+}
+}
+,
+
+4:{
+localizacion:"Metro Via Júlia",
+pregunta:"¿Cuál es el nombre de la madre de Sirius Black?",
+correcta:"C",
+respuestas:{
+A:"Bellatrix Black",
+B:"Druella Black",
+C:"Walburga Black",
+D:"Andromeda Black"
+}
+}
+,
+
+5:{
+localizacion:"Fuentes Via Júlia",
+pregunta:"¿Quién le da a Harry las branquialgas para realizar la segunda prueba del Torneo de los Tres Magos?",
+correcta:"A",
+respuestas:{
+A:"Dobby",
+B:"Neville",
+C:"Ron",
+D:"Hermione"
+}
+}
+,
+
+6:{
+localizacion:"Angel Pestaña",
+pregunta:"¿Cuál es el nombre completo de Albus Dumbledore?",
+correcta:"B",
+respuestas:{
+A:"Albus Percival Walfred Brian Dumbledore",
+B:"Albus Percival Wulfric Brian Dumbledore",
+C:"Albus Percival Wilfred Brian Dumbledore",
+D:"Albus Percival Wulfric Brayan Dumbledore"
+}
+}
+
+};
+
+const url = new URLSearchParams(window.location.search);
+const pista = url.get("pista") || "1";
+
+const datos = preguntas[pista];
+
+document.getElementById("localizacion").innerText =
+"📍 " + datos.localizacion;
+
+document.getElementById("pregunta").innerText =
+datos.pregunta;
+
+let intentos=0;
+
+for(const letra in datos.respuestas){
+
+const boton = document.createElement("button");
+
+boton.className="opcion";
+
+boton.id=letra;
+
+boton.innerHTML=
+"<strong>"+letra+")</strong> "+datos.respuestas[letra];
+
+boton.onclick=()=>comprobar(letra);
+
+document.getElementById("respuestas").appendChild(boton);
+
+}
+
+function comprobar(letra){
+
+if(letra===datos.correcta){
+
+document.getElementById(letra)
+.classList.add("correcta");
+
+document.getElementById("resultado")
+.innerHTML="✅ Correcto. Busca el siguiente QR.";
+
+desactivar();
+
+return;
+}
+
+intentos++;
+
+document.getElementById(letra)
+.classList.add("incorrecta");
+
+if(intentos>=2){
+
+document.getElementById(datos.correcta)
+.classList.add("correcta");
+
+document.getElementById("resultado")
+.innerHTML="❌ Sin intentos. La respuesta correcta era: "
++datos.respuestas[datos.correcta];
+
+desactivar();
+
+}else{
+
+document.getElementById("resultado")
+.innerHTML="❌ Incorrecto. Te queda 1 intento.";
+
+}
+
+}
+
+function desactivar(){
+
+document.querySelectorAll(".opcion")
+.forEach(b=>b.disabled=true);
+
+}
+
+</script>
 
 </body>
 </html>
