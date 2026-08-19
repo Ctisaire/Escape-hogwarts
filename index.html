@@ -1,71 +1,115 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Escape Hogwarts</title>
+<title>⚡ Búsqueda de los Horrocruxes ⚡</title>
+
+://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 body{
     margin:0;
-    padding:20px;
+    padding:25px;
+
     min-height:100vh;
 
-    background:#c8a46b;
-    background-image:
-    linear-gradient(rgba(255,255,255,0.15),rgba(255,255,255,0.15)),
-    url("https://www.transparenttextures.com/patterns/old-paper.png");
+    background:
+    radial-gradient(circle at center,
+    #f3ddb3 0%,
+    #d7b980 55%,
+    #b08142 100%);
 
-    font-family:Georgia, serif;
-    color:#33210f;
+    font-family:'Cinzel', serif;
 }
 
 .contenedor{
 
-    max-width:850px;
+    max-width:900px;
+
     margin:auto;
 
-    background:#f2dfb1;
+    background:#f7e5bc;
 
-    border:6px solid #8a6a33;
-    border-radius:12px;
+    border:8px solid #6b3f00;
 
-    padding:35px;
+    padding:40px;
 
     box-shadow:
-    0 0 30px rgba(0,0,0,0.3);
+    0 0 30px rgba(0,0,0,0.35);
+
+    position:relative;
 }
 
 .logo{
     display:block;
-    margin:auto;
-    width:140px;
+
+    width:220px;
+
+    margin:0 auto 20px auto;
 }
 
 h1{
 
     text-align:center;
-    color:#5a3d12;
 
-    font-size:40px;
+    color:#7b0000;
 
-    margin-top:15px;
+    font-size:48px;
+
+    margin-top:5px;
 
     text-shadow:
-    1px 1px 2px #fff;
+    0 0 8px gold;
+}
+
+.intro{
+
+    text-align:center;
+
+    font-size:20px;
+
+    color:#4d2d09;
+
+    margin-bottom:25px;
+}
+
+.casas{
+
+    text-align:center;
+
+    font-size:22px;
+
+    margin-bottom:30px;
+
+    font-weight:bold;
+
+    color:#5c3500;
 }
 
 h2{
+
+    color:#7b0000;
+
     text-align:center;
-    color:#7a4f18;
+
+    margin-top:20px;
 }
 
 #pregunta{
-    font-size:22px;
+
     text-align:center;
-    margin:30px 0;
+
+    font-size:24px;
+
+    color:#3b2410;
+
+    margin-top:25px;
+
+    margin-bottom:25px;
 }
 
 .opcion{
@@ -76,15 +120,13 @@ h2{
 
     padding:18px;
 
-    margin:12px 0;
-
-    border-radius:8px;
+    margin-top:12px;
 
     border:2px solid #8a6a33;
 
-    background:#ead3a2;
+    background:#f3dba9;
 
-    color:#33210f;
+    color:#3b2410;
 
     font-size:18px;
 
@@ -97,21 +139,40 @@ h2{
 
 .opcion:hover{
 
-    background:#e4c68a;
+    background:#ebcb8d;
+}
+
+@keyframes brillo{
+
+    0%{
+        box-shadow:0 0 5px gold;
+    }
+
+    50%{
+        box-shadow:0 0 30px gold;
+    }
+
+    100%{
+        box-shadow:0 0 5px gold;
+    }
 }
 
 .correcta{
 
-    background:#3d8b40 !important;
+    background:#228b22 !important;
+
     color:white !important;
-    border-color:#2f6b31 !important;
+
+    border-color:gold !important;
+
+    animation:brillo 1.2s infinite;
 }
 
 .incorrecta{
 
-    background:#9e3232 !important;
+    background:#9b2626 !important;
+
     color:white !important;
-    border-color:#6d1111 !important;
 }
 
 #resultado{
@@ -120,14 +181,24 @@ h2{
 
     padding:15px;
 
-    border-radius:8px;
-
     text-align:center;
 
-    font-size:20px;
+    font-size:22px;
 
     font-weight:bold;
 }
+
+.footer{
+
+    text-align:center;
+
+    margin-top:35px;
+
+    color:#6b3f00;
+
+    font-size:14px;
+}
+
 </style>
 
 </head>
@@ -136,14 +207,20 @@ h2{
 
 <div class="contenedor">
 
-<img src=hogwarts.png" class="logo">
+hogwarts.png" class="logo">
 
-<h1>
-⚡ Búsqueda de los Horrocruxes ⚡
-</h1>
+<h1>⚡ Búsqueda de los Horrocruxes ⚡</h1>
 
-<p style="text-align:center;">
-Resuelve el enigma para continuar tu aventura.
+<div class="casas">
+🦁 Gryffindor &nbsp;&nbsp;
+🐍 Slytherin &nbsp;&nbsp;
+🦅 Ravenclaw &nbsp;&nbsp;
+🦡 Hufflepuff
+</div>
+
+<p class="intro">
+📜 El Ministerio de Magia ha ocultado valiosas pistas por el mundo muggle.
+Solo los magos más sabios podrán completar la búsqueda.
 </p>
 
 <h2 id="localizacion"></h2>
@@ -153,6 +230,10 @@ Resuelve el enigma para continuar tu aventura.
 <div id="respuestas"></div>
 
 <div id="resultado"></div>
+
+<div class="footer">
+✨ Escuela de Magia y Hechicería de Hogwarts ✨
+</div>
 
 </div>
 
@@ -182,8 +263,7 @@ B:"Cierva",
 C:"Gato",
 D:"Liebre"
 }
-}
-,
+},
 
 3:{
 localizacion:"Nou Pins",
@@ -195,8 +275,7 @@ B:"Ronan",
 C:"Firenze",
 D:"Magorian"
 }
-}
-,
+},
 
 4:{
 localizacion:"Metro Via Júlia",
@@ -208,8 +287,7 @@ B:"Druella Black",
 C:"Walburga Black",
 D:"Andromeda Black"
 }
-}
-,
+},
 
 5:{
 localizacion:"Fuentes Via Júlia",
@@ -221,8 +299,7 @@ B:"Neville",
 C:"Ron",
 D:"Hermione"
 }
-}
-,
+},
 
 6:{
 localizacion:"Angel Pestaña",
@@ -243,13 +320,13 @@ const pista = url.get("pista") || "1";
 
 const datos = preguntas[pista];
 
-document.getElementById("localizacion").innerText =
+document.getElementById("localizacion").innerHTML =
 "📍 " + datos.localizacion;
 
-document.getElementById("pregunta").innerText =
+document.getElementById("pregunta").innerHTML =
 datos.pregunta;
 
-let intentos=0;
+let intentos = 0;
 
 for(const letra in datos.respuestas){
 
@@ -259,10 +336,10 @@ boton.className="opcion";
 
 boton.id=letra;
 
-boton.innerHTML=
+boton.innerHTML =
 "<strong>"+letra+")</strong> "+datos.respuestas[letra];
 
-boton.onclick=()=>comprobar(letra);
+boton.onclick = () => comprobar(letra);
 
 document.getElementById("respuestas").appendChild(boton);
 
@@ -270,13 +347,14 @@ document.getElementById("respuestas").appendChild(boton);
 
 function comprobar(letra){
 
-if(letra===datos.correcta){
+if(letra === datos.correcta){
 
 document.getElementById(letra)
 .classList.add("correcta");
 
 document.getElementById("resultado")
-.innerHTML="✅ Correcto. Has conseguido la pista.";
+.innerHTML =
+"✅ ¡Correcto! La magia te permite avanzar hacia la siguiente pista.";
 
 desactivar();
 
@@ -288,21 +366,24 @@ intentos++;
 document.getElementById(letra)
 .classList.add("incorrecta");
 
-if(intentos>=2){
+if(intentos >= 2){
 
 document.getElementById(datos.correcta)
 .classList.add("correcta");
 
 document.getElementById("resultado")
-.innerHTML="❌ Sin intentos. La respuesta correcta era: "
-+datos.respuestas[datos.correcta];
+.innerHTML =
+"❌ Has agotado tus intentos.<br><br>La respuesta correcta era: <strong>" +
+datos.respuestas[datos.correcta] +
+"</strong>";
 
 desactivar();
 
 }else{
 
 document.getElementById("resultado")
-.innerHTML="❌ Incorrecto. Te queda 1 intento.";
+.innerHTML =
+"❌ Respuesta incorrecta. Te queda 1 intento.";
 
 }
 
@@ -311,7 +392,7 @@ document.getElementById("resultado")
 function desactivar(){
 
 document.querySelectorAll(".opcion")
-.forEach(b=>b.disabled=true);
+.forEach(b => b.disabled = true);
 
 }
 
